@@ -8,6 +8,9 @@ const Game = {
   redDwarf: [],
   redDwarf02: [],
   greenDwarf: [],
+  backgroundMusic: new Audio(
+    "../imagenes/Blancanieves y los Siete Enanos - Canción tonta (Doblaje 1964).mp3"
+  ),
   blueDwarf: [],
   plane: [],
   purpelDwarf: [],
@@ -46,6 +49,7 @@ const Game = {
       this.isCollisionRed();
       this.isCollisionBlue();
       this.isCollisionGreen();
+      this.playLoop();
       this.drawPlayer();
       this.clearRedDr();
       this.cleanblueDr();
@@ -188,30 +192,43 @@ const Game = {
     console.log("pintas????", this.score, "este es el timer", this.timer);
     this.scoreboard.update(this.score);
   },
+  playLoop() {
+    this.backgroundMusic.volume = 0.3;
+    this.backgroundMusic.loop = true;
+    this.backgroundMusic.play();
+  },
+  stopMusic() {
+    this.backgroundMusic.pause();
+    this.backgroundMusic.currentTime = 0;
+  },
   youWin() {
     this.image = new Image();
-    this.image.src = "../imagenes/background/winner-01.png";
+    this.image.src = "../imagenes/background/winner-01-01.png";
     this.ctx.drawImage(this.image, 0, 0, this.width, this.height);
 
     console.log(this.image, this.posX, this.posY, this.width, this.height);
-    //   clearInterval(this.interval);
+    // clearInterval(this.interval);
   },
 
   isOver() {
-    if (this.score < 4 && this.timer >= 10) {
+    if (this.score < 3 && this.timer >= 15) {
       console.log("score < 500");
       this.gameOver();
-    } else if (this.score >= 4 && this.timer <= 10) {
+    } else if (this.score >= 3 && this.timer <= 15) {
       console.log("score > 500");
       this.youWin();
     }
   },
   gameOver() {
     this.image = new Image();
-    this.image.src = "../imagenes/background/game-over-01.png";
+    this.image.src = "../imagenes/background/game-over-01-01.png";
     this.ctx.drawImage(this.image, 0, 0, this.width, this.height);
 
-    console.log(this.image, this.posX, this.posY, this.width, this.height);
     // clearInterval(this.interval);
+    // this.background.finalDraw();
+    this.stopMusic();
+
+    console.log(this.image, this.posX, this.posY, this.width, this.height);
+    //clearInterval(this.interval);
   }
 };

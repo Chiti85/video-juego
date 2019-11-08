@@ -18,7 +18,7 @@ class Shooter {
   }
   drawShooter() {
     this.ctx.fillStyle = "black";
-    this.ctx.fillRect(this.posX, this.posY, this.width, this.height);
+    this.ctx.fillRect(this.posX, this.posY, this.width, this.height); //quiero cambiar el imagen de esto!
   }
   shooterClear() {
     this.ctx.clearRect(this.posX, this.posY, this.width, this.height);
@@ -61,7 +61,7 @@ class Shooter {
     // ) {
     //this.shooterClear();
     document.onkeydown = e => {
-      console.log("es el switch");
+      console.log("es el switch"); //quiero cambiar la velocidad de la imagen
       switch (e.keyCode) {
         case this.keys.ARROW_LEFT:
           this.posX -= 10;
