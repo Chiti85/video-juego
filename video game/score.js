@@ -8,6 +8,6 @@ const ScoreBoard = {
 
   update: function(score) {
     this.ctx.fillStyle = "black";
-    this.ctx.fillText(Math.floor(score), 150, 50);
+    this.ctx.fillText("Points: " + Math.floor(score), 180, 50);
   }
 };

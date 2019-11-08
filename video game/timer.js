@@ -8,6 +8,6 @@ const Timerboard = {
 
   update: function(time) {
     this.ctx.fillStyle = "black";
-    this.ctx.fillText(Math.floor(time), 50, 50);
+    this.ctx.fillText("Time: " + Math.floor(time), 50, 50);
   }
 };

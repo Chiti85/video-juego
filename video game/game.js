@@ -183,6 +183,7 @@ const Game = {
       });
     }
   },
+  impactDwarf() {},
   drawTimer() {
     this.timerboard.update(this.timer);
   },
@@ -219,10 +220,10 @@ const Game = {
   },
 
   isOver() {
-    if (this.score < 10 && this.timer >= 15) {
+    if (this.score < 3 && this.timer >= 15) {
       console.log("score < 500");
       this.gameOver();
-    } else if (this.score >= 10 && this.timer <= 15) {
+    } else if (this.score >= 3 && this.timer <= 15) {
       console.log("score > 500");
       this.youWin();
     }
