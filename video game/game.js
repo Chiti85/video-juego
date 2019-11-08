@@ -159,6 +159,7 @@ const Game = {
           this.shooter.bullets.posY <= elm.posX + elm.height &&
           this.shooter.bullets.posY + this.shooter.bullets.height >= elm.posY
         ) {
+          this.impactDwarf(elm.posX, elm.posY);
           this.score++;
           this.blueDwarf.splice(idx, 1);
           this.shooter.bullets = undefined;
@@ -176,14 +177,19 @@ const Game = {
           this.shooter.bullets.posY <= elm.posX + elm.height &&
           this.shooter.bullets.posY + this.shooter.bullets.height >= elm.posY
         ) {
-          this.shooter.bullets = undefined;
+          this.impactDwarf(elm.posX, elm.posY);
           this.score += 2;
           this.greenDwarf.splice(idx, 1);
+          this.shooter.bullets = undefined;
         }
       });
     }
   },
-  impactDwarf() {},
+  impactDwarf(x, y) {
+    this.image = new Image();
+    this.image.src = "../imagenes/dwarf and fireworks/fireworks1.png";
+    this.ctx.drawImage(this.image, x, y, 150, 150);
+  },
   drawTimer() {
     this.timerboard.update(this.timer);
   },
@@ -220,10 +226,10 @@ const Game = {
   },
 
   isOver() {
-    if (this.score < 3 && this.timer >= 15) {
+    if (this.score < 10 && this.timer >= 20) {
       console.log("score < 500");
       this.gameOver();
-    } else if (this.score >= 3 && this.timer <= 15) {
+    } else if (this.score >= 10 && this.timer <= 20) {
       console.log("score > 500");
       this.youWin();
     }
