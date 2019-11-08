@@ -11,6 +11,8 @@ const Game = {
   backgroundMusic: new Audio(
     "../imagenes/Blancanieves y los Siete Enanos - Canción tonta (Doblaje 1964).mp3"
   ),
+  overMusic: new Audio("../imagenes/game over sound.wav"),
+  winnerMusic: new Audio("../imagenes/winsound.mp3"),
   blueDwarf: [],
   plane: [],
   purpelDwarf: [],
@@ -134,7 +136,6 @@ const Game = {
   },
   isCollisionRed() {
     if (this.shooter.bullets) {
-      //this.shooter.bullets.posX
       console.log(this.shooter.bullets);
       this.redDwarf.some((elm, idx) => {
         if (
@@ -144,7 +145,6 @@ const Game = {
           this.shooter.bullets.posY + this.shooter.bullets.height >= elm.posY
         ) {
           this.shooter.bullets = undefined;
-          //   this.redDwarf.splice(idx, 1);
         }
       });
     }
@@ -166,7 +166,6 @@ const Game = {
         console.log("blueee if");
       });
     }
-    // if (this.isCollisionBlue()) this.score++;
   },
   isCollisionGreen() {
     if (this.shooter.bullets) {
@@ -183,7 +182,6 @@ const Game = {
         }
       });
     }
-    // if (this.isCollisionBlue()) this.score++;
   },
   drawTimer() {
     this.timerboard.update(this.timer);
@@ -201,20 +199,30 @@ const Game = {
     this.backgroundMusic.pause();
     this.backgroundMusic.currentTime = 0;
   },
+  gameOverMusic() {
+    console.log("music gameover");
+    //   this.gameOver.volume = 0.3;
+    //   this.gameOver.loop = true;
+    this.overMusic.play();
+  },
+  winMusic() {
+    this.winnerMusic.play();
+  },
   youWin() {
     this.image = new Image();
     this.image.src = "../imagenes/background/winner-01-01.png";
     this.ctx.drawImage(this.image, 0, 0, this.width, this.height);
-
+    this.stopMusic();
+    this.winMusic();
+    clearInterval(this.interval);
     console.log(this.image, this.posX, this.posY, this.width, this.height);
-    // clearInterval(this.interval);
   },
 
   isOver() {
-    if (this.score < 3 && this.timer >= 15) {
+    if (this.score < 10 && this.timer >= 15) {
       console.log("score < 500");
       this.gameOver();
-    } else if (this.score >= 3 && this.timer <= 15) {
+    } else if (this.score >= 10 && this.timer <= 15) {
       console.log("score > 500");
       this.youWin();
     }
@@ -224,11 +232,9 @@ const Game = {
     this.image.src = "../imagenes/background/game-over-01-01.png";
     this.ctx.drawImage(this.image, 0, 0, this.width, this.height);
 
-    // clearInterval(this.interval);
-    // this.background.finalDraw();
     this.stopMusic();
+    this.gameOverMusic();
 
     console.log(this.image, this.posX, this.posY, this.width, this.height);
-    //clearInterval(this.interval);
   }
 };

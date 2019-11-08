@@ -12,13 +12,11 @@ class Shooter {
     this.keys = keys;
     this.player = player;
 
-    // this.bullets = bullets;
-
     this.setListener();
   }
   drawShooter() {
     this.ctx.fillStyle = "black";
-    this.ctx.fillRect(this.posX, this.posY, this.width, this.height); //quiero cambiar el imagen de esto!
+    this.ctx.fillRect(this.posX, this.posY, this.width, this.height);
   }
   shooterClear() {
     this.ctx.clearRect(this.posX, this.posY, this.width, this.height);
@@ -36,7 +34,6 @@ class Shooter {
     this.shootingInterval = setInterval(() => {
       this.bullets.updateBullets();
     }, 10);
-    // this.bullets.clearBullets();
   }
   moveShooter(event) {
     if (!this.actionDetected) {
@@ -52,31 +49,24 @@ class Shooter {
   }
   setListener() {
     console.log("son lAS KEYS");
-    // if (
-    //   (e.keys === this.keys.ARROW_LEFT && this.posX > 0) ||
-    //   (e.keys === this.keys.TOP_KEY && this.posY > 0) || //para que no se salga de la pantalla el puntero(shooter) //this.player.posY > 0
-    //   (e.keys === this.keys.ARROW_RIGHT && this.posX < 1180) ||
-    //   (e.keys === this.keys.ARROW_DOWN && this.posY < 300) //this.player.posY < 300
-    //   //|| e.keys === this.keys.SPACE
-    // ) {
-    //this.shooterClear();
+
     document.onkeydown = e => {
-      console.log("es el switch"); //quiero cambiar la velocidad de la imagen
+      console.log("es el switch");
       switch (e.keyCode) {
         case this.keys.ARROW_LEFT:
-          this.posX -= 10;
-          this.player.posX -= 10;
+          this.posX -= 20;
+          this.player.posX -= 20;
           break;
         case this.keys.TOP_KEY:
-          this.player.posY -= 10;
+          this.player.posY -= 20;
 
           break;
         case this.keys.ARROW_RIGHT:
-          this.posX += 10;
-          this.player.posX += 10;
+          this.posX += 20;
+          this.player.posX += 20;
           break;
         case this.keys.ARROW_DOWN:
-          this.player.posY += 10;
+          this.player.posY += 20;
 
           break;
         case this.keys.SPACE:
